@@ -28,6 +28,7 @@
     <Compile Include="TextMLSamples.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fear_and_loathing.txt" />
     <Content Include="london.txt" />
     <Content Include="sample.txt" />
   </ItemGroup>
