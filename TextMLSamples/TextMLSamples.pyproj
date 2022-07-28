@@ -21,7 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="extract_entities.py" />
+    <Compile Include="fact_extraction.py" />
+    <Compile Include="noun_chunk_extraction.py" />
+    <Compile Include="redact_text.py" />
     <Compile Include="TextMLSamples.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="london.txt" />
+    <Content Include="sample.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
