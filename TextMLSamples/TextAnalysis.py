@@ -12,6 +12,10 @@ from spacytextblob.spacytextblob import SpacyTextBlob
 from spacy.lang.en.stop_words import STOP_WORDS
 from string import punctuation
 from heapq import nlargest
+
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+
 import tkinter as tk
 from tkinter import filedialog
 
@@ -33,7 +37,7 @@ def UploadAction(event=None):
     with open(filename, "r") as f:
         lines = f.read()
 
-    print(lines)
+    #print(lines)
     print()
 
 
@@ -41,7 +45,7 @@ def UploadAction(event=None):
     nlp = spacy.load('en_core_web_sm')
     doc = nlp(lines)
     tokens = [token.text for token in doc]
-    print(tokens)
+    #print(tokens)
 
     ##Get word frequencies
     word_frequencies={}
@@ -52,7 +56,7 @@ def UploadAction(event=None):
                     word_frequencies[word.text] = 1
                 else:
                     word_frequencies[word.text] += 1
-    print(word_frequencies)
+    #print(word_frequencies)
 
     ##Normalize frequencies (max frequency / all frequency)
     max_frequency=max(word_frequencies.values())
@@ -62,7 +66,7 @@ def UploadAction(event=None):
 
     ##Tokenize sentences
     sentence_tokens= [sent for sent in doc.sents]
-    print(sentence_tokens)
+   # print(sentence_tokens)
 
     ##get sentence scores (adding and comparing word frequencies of each sentence)
     sentence_scores = {}
@@ -79,13 +83,22 @@ def UploadAction(event=None):
     select_length=int(len(sentence_tokens)*0.3)
     select_length
     summary=nlargest(select_length, sentence_scores,key=sentence_scores.get)
-    print(summary)
+    #print(summary)
 
     final_summary=[word.text for word in summary]
     final_summary
     summary=''.join(final_summary)
     summary
     print(summary)
+
+
+   ##Create wordcloud
+    wordcloud = WordCloud()
+    wordcloud.generate_from_frequencies(frequencies=word_frequencies)
+    plt.figure()
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
 
 
 
